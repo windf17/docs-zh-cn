@@ -432,3 +432,35 @@ methods: {
 - return numbers.reverse()
 + return [...numbers].reverse()
 ```
+
+## 请注意sort的坑
+
+```typescript
+let arr = [1, 100, 20, 200, 40, 50, 120, 10]
+arr.sort()
+console.log(arr)
+// 输出结果
+[1, 10, 100, 120, 20, 200, 40, 50]
+
+// 建议使用
+arr.sort((a,b)=>a-b)
+console.log(arr)
+// 输出结果
+[1, 10, 20, 40, 50, 100, 120, 200]
+
+```
+
+## 不建议用reverse
+```typescript
+let arr = [1, 100, 20, 200, 40, 50, 120, 10]
+arr.reverse()
+console.log(arr)
+// 输出结果
+[10, 120, 50, 40, 200, 20, 100, 1]
+// 建议使用
+arr.sort((a,b)=>b-a)
+console.log(arr)
+// 输出结果
+[200, 120, 100, 50, 40, 20, 10, 1]
+
+```
