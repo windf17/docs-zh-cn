@@ -214,9 +214,11 @@ data() {
 
 ```vue-html
 <ul>
-  <template v-for="item in items">
-    <li>{{ item.msg }}</li>
-    <li class="divider" role="presentation"></li>
+  <template>
+    <ul v-for="item in items">
+      <li>{{ item.msg }}</li>
+      <li class="divider" role="presentation"></li>
+    </ul>
   </template>
 </ul>
 ```
@@ -242,10 +244,12 @@ data() {
 在外新包装一层 `<template>` 再在其上使用 `v-for` 可以解决这个问题 (这也更加明显易读)：
 
 ```vue-html
-<template v-for="todo in todos">
-  <li v-if="!todo.isComplete">
-    {{ todo.name }}
-  </li>
+<template>
+  <ul v-for="todo in todos" :key="todo.name">
+    <li v-if="!todo.isComplete">
+      {{ todo.name }}
+    </li>
+  </ul>
 </template>
 ```
 
@@ -266,8 +270,10 @@ Vue 默认按照“就地更新”的策略来更新通过 `v-for` 渲染的元�
 当你使用 `<template v-for>` 时，`key` 应该被放置在这个 `<template>` 容器上：
 
 ```vue-html
-<template v-for="todo in todos" :key="todo.name">
-  <li>{{ todo.name }}</li>
+<template>
+  <ul v-for="todo in todos" :key="todo.name">
+    <li>{{ todo.name }}</li>
+  </ul>
 </template>
 ```
 
